@@ -1,7 +1,7 @@
 package application;
 
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import javafx.scene.layout.Pane;
 
@@ -9,7 +9,7 @@ public class MazeNode {
 	private Pane pane;
 	private int row;
 	private int column;
-	private ArrayList<MazeNode> neighboors;
+	private HashMap<Directions, MazeNode> neighbors;
 	private NodeStatus status; // Start/Finish/Regular Node
 	private boolean visited;
 	
@@ -22,7 +22,7 @@ public class MazeNode {
 		this.visited = false;
 	}
 	
-	public void addNeighboor(MazeNode mn) {
-		neighboors.add(mn);
+	public void addNeighbor(Directions dir, MazeNode mn) {
+		neighbors.put(dir, mn);
 	}
 }

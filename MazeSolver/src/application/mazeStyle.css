@@ -1,7 +1,7 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 
 .root{
-	-fx-background-color: white;
+	-fx-background-color: rgb(138,142,157);
 }
 
 Pane{
@@ -11,7 +11,7 @@ Pane{
 
 #pane00{
 	-fx-border-width: 0px 4px 0px 4px;
-	/*-fx-background-image: url("start.png")*/
+	/*-fx-background-image: url("start.png");*/
 }
 #pane01{
 	-fx-border-width: 4px 4px 0px 0px;
@@ -407,4 +407,5 @@ Pane{
 
 #pane99{
 	-fx-border-width: 0px 4px 0px 0px;
+	/*-fx-background-image: url("finish.png");*/
 }

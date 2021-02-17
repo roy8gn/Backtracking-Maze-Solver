@@ -1,301 +1,343 @@
 package application;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
+
+import org.w3c.dom.NodeList;
+
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
-public class MazeController {
-
-	
+public class MazeController implements Initializable{
 	
 	// Variables: 
-    @FXML
-    private Pane pane23;
-    @FXML
-    private Pane pane22;
-    @FXML
-    private Pane pane25;
-    @FXML
-    private Pane pane24;
-    @FXML
-    private Pane pane27;
-    @FXML
-    private Pane pane26;
-    @FXML
-    private Pane pane29;
-    @FXML
-    private Pane pane28;
-    @FXML
-    private Pane pane21;
-    @FXML
-    private Pane pane20;
-    @FXML
-    private Pane pane12;
-    @FXML
-    private Pane pane11;
+	
+	private String visitedColor = "rgb(170, 88, 57)";
+	private String pathColor = "rgb(219, 64, 6)";
+	private String finalPathColor = "rgb(1, 144, 1)";
+	
 
     @FXML
-    private Pane pane99;
+    protected static Pane pane23;
+    @FXML
+    protected static Pane pane22;
+    @FXML
+    protected static Pane pane25;
+    @FXML
+    protected static Pane pane24;
+    @FXML
+    protected static Pane pane27;
+    @FXML
+    protected static Pane pane26;
+    @FXML
+    protected static Pane pane29;
+    @FXML
+    protected static Pane pane28;
+    @FXML
+    protected static Pane pane21;
+    @FXML
+    protected static Pane pane20;
+    @FXML
+    protected static Pane pane12;
+    @FXML
+    protected static Pane pane11;
 
     @FXML
-    private Pane pane14;
+    protected static Pane pane99;
 
     @FXML
-    private Pane pane13;
+    protected static Pane pane14;
 
     @FXML
-    private Pane pane16;
+    protected static Pane pane13;
 
     @FXML
-    private Pane pane15;
+    protected static Pane pane16;
 
     @FXML
-    private Pane pane18;
+    protected static Pane pane15;
 
     @FXML
-    private Pane pane17;
+    protected static Pane pane18;
 
     @FXML
-    private Pane pane92;
+    protected static Pane pane17;
 
     @FXML
-    private Pane pane91;
+    protected static Pane pane92;
 
     @FXML
-    private Pane pane94;
+    protected static Pane pane91;
 
     @FXML
-    private Pane pane93;
+    protected static Pane pane94;
 
     @FXML
-    private Pane pane96;
+    protected static Pane pane93;
 
     @FXML
-    private Pane pane95;
+    protected static Pane pane96;
 
     @FXML
-    private Pane pane10;
+    protected static Pane pane95;
 
     @FXML
-    private Pane pane98;
+    protected static Pane pane10;
 
     @FXML
-    private Pane pane97;
+    protected static Pane pane98;
 
     @FXML
-    private Pane pane19;
+    protected static Pane pane97;
 
     @FXML
-    private Pane pane45;
+    protected static Pane pane19;
 
     @FXML
-    private Pane pane44;
+    protected static Pane pane45;
 
     @FXML
-    private Pane pane47;
+    protected static Pane pane44;
 
     @FXML
-    private Pane pane46;
+    protected static Pane pane47;
 
     @FXML
-    private Pane pane49;
+    protected static Pane pane46;
 
     @FXML
-    private Pane pane48;
+    protected static Pane pane49;
 
     @FXML
-    private Pane pane41;
+    protected static Pane pane48;
 
     @FXML
-    private Pane pane40;
+    protected static Pane pane41;
 
     @FXML
-    private Pane pane43;
+    protected static Pane pane40;
 
     @FXML
-    private Pane pane42;
+    protected static Pane pane43;
+
+    @FXML
+    protected static Pane pane42;
 
     @FXML
     private GridPane mazeGrid;
 
     @FXML
-    private Pane pane34;
+    protected static Pane pane34;
 
     @FXML
-    private Pane pane33;
+    protected static Pane pane33;
 
     @FXML
-    private Pane pane36;
+    protected static Pane pane36;
 
     @FXML
-    private Pane pane35;
+    protected static Pane pane35;
 
     @FXML
-    private Pane pane38;
+    protected static Pane pane38;
 
     @FXML
-    private Pane pane37;
+    protected static Pane pane37;
 
     @FXML
-    private Pane pane39;
+    protected static Pane pane39;
 
     @FXML
-    private Pane pane30;
+    protected static Pane pane30;
 
     @FXML
-    private Pane pane32;
+    protected static Pane pane32;
 
     @FXML
-    private Pane pane31;
+    protected static Pane pane31;
 
     @FXML
-    private Pane pane67;
+    protected static Pane pane67;
 
     @FXML
-    private Pane pane66;
+    protected static Pane pane66;
 
     @FXML
-    private Pane pane69;
+    protected static Pane pane69;
 
     @FXML
-    private Pane pane68;
+    protected static Pane pane68;
 
     @FXML
-    private Pane pane61;
+    protected static Pane pane61;
 
     @FXML
-    private Pane pane60;
+    protected static Pane pane60;
 
     @FXML
-    private Pane pane63;
+    protected static Pane pane63;
 
     @FXML
-    private Pane pane62;
+    protected static Pane pane62;
 
     @FXML
-    private Pane pane65;
+    protected static Pane pane65;
 
     @FXML
-    private Pane pane64;
+    protected static Pane pane64;
 
     @FXML
-    private Pane pane56;
+    protected static Pane pane56;
 
     @FXML
-    private Pane pane55;
+    protected static Pane pane55;
 
     @FXML
-    private Pane pane58;
+    protected static Pane pane58;
 
     @FXML
-    private Pane pane57;
+    protected static Pane pane57;
 
     @FXML
-    private Pane pane59;
+    protected static Pane pane59;
 
     @FXML
-    private Pane pane50;
+    protected static Pane pane50;
 
     @FXML
-    private Pane pane52;
+    protected static Pane pane52;
 
     @FXML
-    private Pane pane51;
+    protected static Pane pane51;
 
     @FXML
-    private Pane pane54;
+    protected static Pane pane54;
 
     @FXML
-    private Pane pane53;
+    protected static Pane pane53;
 
     @FXML
-    private Pane pane01;
+    protected static Pane pane01;
 
     @FXML
-    private Pane pane89;
+    protected static Pane pane89;
 
     @FXML
-    private Pane pane00;
+    protected static Pane pane06;
+    
+    @FXML
+    protected static Pane pane00;
 
     @FXML
-    private Pane pane88;
+    protected static Pane pane88;
 
     @FXML
-    private Pane pane03;
+    protected static Pane pane03;
 
     @FXML
-    private Pane pane02;
+    protected static Pane pane02;
 
     @FXML
-    private Pane pane05;
+    protected static Pane pane05;
 
     @FXML
-    private Pane pane04;
+    protected static Pane pane04;
 
     @FXML
-    private Pane pane07;
+    protected static Pane pane07;
 
     @FXML
-    private Pane pane81;
+    protected static Pane pane81;
 
     @FXML
-    private Pane pane80;
+    protected static Pane pane80;
 
     @FXML
-    private Pane pane83;
+    protected static Pane pane83;
 
     @FXML
-    private Pane pane82;
+    protected static Pane pane82;
 
     @FXML
-    private Pane pane85;
+    protected static Pane pane85;
 
     @FXML
-    private Pane pane84;
+    protected static Pane pane84;
 
     @FXML
-    private Pane pane87;
+    protected static Pane pane87;
 
     @FXML
-    private Pane pane86;
+    protected static Pane pane86;
 
     @FXML
-    private Pane pane90;
+    protected static Pane pane90;
 
     @FXML
-    private Pane pane09;
+    protected static Pane pane09;
 
     @FXML
-    private Pane pane08;
+    protected static Pane pane08;
 
     @FXML
-    private Pane pane78;
+    protected static Pane pane78;
 
     @FXML
-    private Pane pane77;
+    protected static Pane pane77;
 
     @FXML
-    private Pane pane79;
+    protected static Pane pane79;
 
     @FXML
-    private Pane pane70;
+    protected static Pane pane70;
 
     @FXML
-    private Pane pane72;
+    protected static Pane pane72;
 
     @FXML
-    private Pane pane71;
+    protected static Pane pane71;
 
     @FXML
-    private Pane pane74;
+    protected static Pane pane74;
 
     @FXML
-    private Pane pane73;
+    protected static Pane pane73;
 
     @FXML
-    private Pane pane76;
+    protected static Pane pane76;
 
     @FXML
-    private Pane pane75;
+    protected static Pane pane75;
+
+	
+	public void changeColor(Pane p, String color) {
+		p.setStyle("-fx-background-color:" + color + ";");
+	}
+	
+	public void sleep(){
+		try {
+			TimeUnit.SECONDS.sleep(1);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+
+	
+	@FXML
+	void startMazeSolving(KeyEvent event) throws InterruptedException{
+	
+	}
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+	}
 
 }

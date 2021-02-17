@@ -16,7 +16,7 @@ public class Main extends Application {
 		try {
 			
 			Parent root = FXMLLoader.load(getClass().getResource("MazeGUI.fxml"));
-			mazeScene = new Scene(root,500,500);
+			mazeScene = new Scene(root,488,480);
 			
 			mazeScene.getStylesheets().add(getClass().getResource("mazeStyle.css").toExternalForm());
 			primaryStage.setTitle("Maze Solver");
