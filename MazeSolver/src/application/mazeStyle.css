@@ -1,0 +1,410 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+.root{
+	-fx-background-color: white;
+}
+
+Pane{
+	-fx-border-color: black;
+	-fx-border-width: 0px;
+}
+
+#pane00{
+	-fx-border-width: 0px 4px 0px 4px;
+	/*-fx-background-image: url("start.png")*/
+}
+#pane01{
+	-fx-border-width: 4px 4px 0px 0px;
+}
+
+#pane02{
+	-fx-border-width: 4px 0px 0px 0px;
+}
+
+#pane03{
+	-fx-border-width: 4px 0px 4px 0px;
+}
+
+#pane04{
+	-fx-border-width: 4px 0px 0px 0px;
+}
+
+#pane05{
+	-fx-border-width: 4px 0px 4px 0px;
+}
+
+#pane06{
+	-fx-border-width: 4px 4px 0px 0px;
+}
+
+#pane07{
+	-fx-border-width: 4px 0px 0px 0px;
+}
+
+#pane08{
+	-fx-border-width: 4px 0px 4px 0px;
+}
+
+#pane09{
+	-fx-border-width: 4px 4px 0px 0px;
+}
+
+#pane10{
+	-fx-border-width: 0px 0px 0px 4px;
+}
+
+#pane11{
+	-fx-border-width: 0px 4px 4px 0px;
+}
+
+#pane12{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane13{
+	-fx-border-width: 0px 4px 0px 0px;
+}
+
+#pane14{
+	-fx-border-width: 0px 0px 0px 0px;
+}
+
+#pane15{
+	-fx-border-width: 0px 4px 0px 4px;
+}
+
+#pane16{
+	-fx-border-width: 0px 4px 0px 0px;
+}
+
+#pane17{
+	-fx-border-width: 0px 0px 0px 0px;
+}
+
+#pane18{
+	-fx-border-width: 0px 4px 0px 4px;
+}
+
+#pane19{
+	-fx-border-width: 0px 4px 0px 0px;
+}
+
+#pane20{
+	-fx-border-width: 0px 0px 0px 4px;
+}
+
+#pane21{
+	-fx-border-width: 0px 0px 0px 4px;
+}
+
+#pane22{
+	-fx-border-width: 0px 0px 0px 0px;
+}
+
+#pane23{
+	-fx-border-width: 0px 4px 4px 0px;
+}
+
+#pane24{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane25{
+	-fx-border-width: 0px 4px 4px 0px;
+}
+
+#pane26{
+	-fx-border-width: 0px 4px 0px 0px;
+}
+
+#pane27{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane28{
+	-fx-border-width: 0px 4px 0px 0px;
+}
+
+#pane29{
+	-fx-border-width: 0px 4px 0px 0px;
+}
+
+#pane30{
+	-fx-border-width: 0px 0px 0px 4px;
+}
+
+#pane31{
+	-fx-border-width: 0px 4px 0px 4px;
+}
+
+#pane32{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane33{
+	-fx-border-width: 0px 0px 4px 4px;
+}
+
+#pane34{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane35{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane36{
+	-fx-border-width: 0px 4px 0px 0px;
+}
+
+#pane37{
+	-fx-border-width: 0px 4px 0px 0px;
+}
+
+#pane38{
+	-fx-border-width: 0px 4px 0px 0px;
+}
+
+#pane39{
+	-fx-border-width: 0px 4px 0px 0px;
+}
+
+#pane40{
+	-fx-border-width: 0px 0px 0px 4px;
+}
+
+#pane41{
+	-fx-border-width: 0px 4px 0px 0px;
+}
+
+#pane42{
+	-fx-border-width: 0px 0px 0px 0px;
+}
+
+#pane43{
+	-fx-border-width: 0px 4px 4px 0px;
+}
+
+#pane44{
+	-fx-border-width: 0px 0px 0px 0px;
+}
+
+#pane45{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane46{
+	-fx-border-width: 0px 4px 4px 0px;
+}
+
+#pane47{
+	-fx-border-width: 0px 0px 0px 0px;
+}
+
+#pane48{
+	-fx-border-width: 0px 4px 0px 0px;
+}
+
+#pane49{
+	-fx-border-width: 0px 4px 0px 0px;
+}
+
+#pane50{
+	-fx-border-width: 0px 0px 0px 4px;
+}
+
+#pane51{
+	-fx-border-width: 0px 0px 4px 4px;
+}
+
+#pane52{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane53{
+	-fx-border-width: 0px 0px 0px 4px;
+}
+
+#pane54{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane55{
+	-fx-border-width: 0px 0px 0px 4px;
+}
+
+#pane56{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane57{
+	-fx-border-width: 0px 4px 4px 0px;
+}
+
+#pane58{
+	-fx-border-width: 0px 4px 4px 0px;
+}
+
+#pane59{
+	-fx-border-width: 0px 4px 0px 0px;
+}
+
+#pane60{
+	-fx-border-width: 0px 0px 4px 4px;
+}
+
+#pane61{
+	-fx-border-width: 0px 0px 4px 4px;
+}
+
+#pane62{
+	-fx-border-width: 0px 0px 0px 0px;
+}
+
+#pane63{
+	-fx-border-width: 0px 0px 0px 4px;
+}
+
+#pane64{
+	-fx-border-width: 0px 0px 0px 4px;
+}
+
+#pane65{
+	-fx-border-width: 0px 0px 4px 4px;
+}
+
+#pane66{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane67{
+	-fx-border-width: 0px 4px 0px 0px;
+}
+
+#pane68{
+	-fx-border-width: 0px 0px 0px 0px;
+}
+
+#pane69{
+	-fx-border-width: 0px 4px 4px 0px;
+}
+
+#pane70{
+	-fx-border-width: 0px 0px 0px 4px;
+}
+
+#pane71{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane72{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane73{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane74{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane75{
+	-fx-border-width: 0px 0px 0px 0px;
+}
+
+#pane76{
+	-fx-border-width: 0px 0px 4px 4px;
+}
+
+#pane77{
+	-fx-border-width: 0px 4px 0px 0px;
+}
+
+#pane78{
+	-fx-border-width: 0px 0px 0px 0px;
+}
+
+#pane79{
+	-fx-border-width: 0px 4px 0px 4px;
+}
+
+#pane80{
+	-fx-border-width: 0px 0px 0px 4px;
+}
+
+#pane81{
+	-fx-border-width: 0px 4px 0px 4px;
+}
+
+#pane82{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane83{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane84{
+	-fx-border-width: 0px 4px 0px 0px;
+}
+
+#pane85{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane86{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane87{
+	-fx-border-width: 0px 4px 4px 0px;
+}
+
+#pane88{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane89{
+	-fx-border-width: 0px 4px 0px 0px;
+}
+
+#pane90{
+	-fx-border-width: 0px 0px 4px 4px;
+}
+
+#pane91{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane92{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane93{
+	-fx-border-width: 0px 4px 4px 0px;
+}
+
+#pane94{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane95{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane96{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane97{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane98{
+	-fx-border-width: 0px 0px 4px 0px;
+}
+
+#pane99{
+	-fx-border-width: 0px 4px 0px 0px;
+}
