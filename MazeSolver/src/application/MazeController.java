@@ -20,7 +20,7 @@ public class MazeController implements Initializable{
 	private String visitedColor = "rgb(170, 88, 57)";
 	private String pathColor = "rgb(219, 64, 6)";
 	private String finalPathColor = "rgb(1, 144, 1)";
-	
+	private Maze maze = Maze.getInstance();
 
     @FXML
     protected static Pane pane23;
@@ -332,7 +332,7 @@ public class MazeController implements Initializable{
 	
 	@FXML
 	void startMazeSolving(KeyEvent event) throws InterruptedException{
-	
+		System.out.println("Something happend");
 	}
 	
 	@Override

@@ -3,13 +3,24 @@ package application;
 import java.util.ArrayList;
 
 public class Maze {
+	
+	private static Maze mazeInstance = null; 
 	private MazeNode nodes[][];
 	
-	public Maze() {
+	private Maze() {
 		nodes = new MazeNode[10][10];
 		initMazeNodes();
+		initNeighbors();
+		System.out.println(nodes[5][5].getNeighbors());
 		
 	}
+	
+	public static Maze getInstance(){ 
+        if (mazeInstance == null) 
+            mazeInstance = new Maze(); 
+        
+        return mazeInstance; 
+    } 
 		
 	public void initMazeNodes() {
 		nodes[0][0] = new MazeNode(MazeController.pane00 , 0, 0, NodeStatus.START);
@@ -45,12 +56,12 @@ public class Maze {
 		nodes[2][8] = new MazeNode(MazeController.pane28 , 2, 8, NodeStatus.REGULAR);
 		nodes[2][9] = new MazeNode(MazeController.pane29 , 2, 9, NodeStatus.REGULAR);
 		
-		nodes[3][1] = new MazeNode(MazeController.pane30 , 3, 0, NodeStatus.REGULAR);
-		nodes[3][2] = new MazeNode(MazeController.pane31 , 3, 1, NodeStatus.REGULAR);
-		nodes[3][3] = new MazeNode(MazeController.pane32 , 3, 2, NodeStatus.REGULAR);
-		nodes[3][4] = new MazeNode(MazeController.pane33 , 3, 3, NodeStatus.REGULAR);
-		nodes[3][5] = new MazeNode(MazeController.pane34 , 3, 4, NodeStatus.REGULAR);
-		nodes[3][6] = new MazeNode(MazeController.pane35 , 3, 5, NodeStatus.REGULAR);
+		nodes[3][0] = new MazeNode(MazeController.pane30 , 3, 0, NodeStatus.REGULAR);
+		nodes[3][1] = new MazeNode(MazeController.pane31 , 3, 1, NodeStatus.REGULAR);
+		nodes[3][2] = new MazeNode(MazeController.pane32 , 3, 2, NodeStatus.REGULAR);
+		nodes[3][3] = new MazeNode(MazeController.pane33 , 3, 3, NodeStatus.REGULAR);
+		nodes[3][4] = new MazeNode(MazeController.pane34 , 3, 4, NodeStatus.REGULAR);
+		nodes[3][5] = new MazeNode(MazeController.pane35 , 3, 5, NodeStatus.REGULAR);
 		nodes[3][6] = new MazeNode(MazeController.pane36 , 3, 6, NodeStatus.REGULAR);
 		nodes[3][7] = new MazeNode(MazeController.pane37 , 3, 7, NodeStatus.REGULAR);
 		nodes[3][8] = new MazeNode(MazeController.pane38 , 3, 8, NodeStatus.REGULAR);
@@ -180,5 +191,243 @@ public class Maze {
 		
 		nodes[1][9].addNeighbor(Directions.UP, nodes[0][9]);
 		nodes[1][9].addNeighbor(Directions.DOWN, nodes[2][9]);
+		
+		nodes[2][0].addNeighbor(Directions.UP, nodes[1][0]);
+		nodes[2][0].addNeighbor(Directions.DOWN, nodes[3][0]);
+		
+		nodes[2][1].addNeighbor(Directions.RIGHT, nodes[2][2]);
+		nodes[2][1].addNeighbor(Directions.DOWN, nodes[3][1]);
+		
+		nodes[2][2].addNeighbor(Directions.LEFT, nodes[2][1]);
+		nodes[2][2].addNeighbor(Directions.RIGHT, nodes[2][3]);
+		nodes[2][2].addNeighbor(Directions.DOWN, nodes[3][2]);
+		
+		nodes[2][3].addNeighbor(Directions.LEFT, nodes[2][2]);
+		nodes[2][3].addNeighbor(Directions.UP, nodes[1][3]);
+		
+		nodes[2][4].addNeighbor(Directions.RIGHT, nodes[2][5]);
+		nodes[2][4].addNeighbor(Directions.UP, nodes[1][4]);
+		
+		nodes[2][5].addNeighbor(Directions.LEFT, nodes[2][4]);
+		nodes[2][5].addNeighbor(Directions.UP, nodes[1][5]);
+		
+		nodes[2][6].addNeighbor(Directions.UP, nodes[1][6]);
+		nodes[2][6].addNeighbor(Directions.DOWN, nodes[3][6]);
+		
+		nodes[2][7].addNeighbor(Directions.RIGHT, nodes[2][8]);
+		nodes[2][7].addNeighbor(Directions.UP, nodes[1][7]);
+		
+		nodes[2][8].addNeighbor(Directions.LEFT, nodes[2][7]);
+		nodes[2][8].addNeighbor(Directions.UP, nodes[1][8]);
+		
+		nodes[2][9].addNeighbor(Directions.UP, nodes[1][9]);
+		nodes[2][9].addNeighbor(Directions.DOWN, nodes[3][9]);
+		
+		nodes[3][0].addNeighbor(Directions.UP, nodes[2][0]);
+		nodes[3][0].addNeighbor(Directions.DOWN, nodes[4][0]);
+		
+		nodes[3][1].addNeighbor(Directions.UP, nodes[2][1]);
+		nodes[3][1].addNeighbor(Directions.DOWN, nodes[4][1]);
+		
+		nodes[3][2].addNeighbor(Directions.UP, nodes[2][2]);
+		
+		nodes[3][3].addNeighbor(Directions.RIGHT, nodes[3][4]);
+		
+		nodes[3][4].addNeighbor(Directions.LEFT, nodes[3][3]);
+		nodes[3][4].addNeighbor(Directions.RIGHT, nodes[3][5]);
+		
+		nodes[3][5].addNeighbor(Directions.LEFT, nodes[3][4]);
+		nodes[3][5].addNeighbor(Directions.RIGHT, nodes[3][6]);
+		
+		nodes[3][6].addNeighbor(Directions.LEFT, nodes[3][5]);
+		nodes[3][6].addNeighbor(Directions.UP, nodes[2][6]);
+		nodes[3][6].addNeighbor(Directions.DOWN, nodes[4][6]);
+		
+		nodes[3][7].addNeighbor(Directions.DOWN, nodes[4][7]);
+		
+		nodes[3][8].addNeighbor(Directions.UP, nodes[2][8]);
+		nodes[3][8].addNeighbor(Directions.DOWN, nodes[4][8]);
+		
+		nodes[3][9].addNeighbor(Directions.UP, nodes[2][9]);
+		nodes[3][9].addNeighbor(Directions.DOWN, nodes[4][9]);
+		
+		nodes[4][0].addNeighbor(Directions.RIGHT, nodes[4][1]);
+		nodes[4][0].addNeighbor(Directions.UP, nodes[3][0]);
+		nodes[4][0].addNeighbor(Directions.DOWN, nodes[5][0]);
+		
+		nodes[4][1].addNeighbor(Directions.LEFT, nodes[4][0]);
+		nodes[4][1].addNeighbor(Directions.UP, nodes[3][1]);
+		nodes[4][1].addNeighbor(Directions.DOWN, nodes[5][1]);
+		
+		nodes[4][2].addNeighbor(Directions.RIGHT, nodes[4][3]);
+		nodes[4][2].addNeighbor(Directions.DOWN, nodes[5][2]);
+		
+		nodes[4][3].addNeighbor(Directions.LEFT, nodes[4][2]);
+		
+		nodes[4][4].addNeighbor(Directions.RIGHT, nodes[4][5]);
+		nodes[4][4].addNeighbor(Directions.DOWN, nodes[5][4]);
+		
+		nodes[4][5].addNeighbor(Directions.LEFT, nodes[4][4]);
+		nodes[4][5].addNeighbor(Directions.RIGHT, nodes[4][6]);
+		
+		nodes[4][6].addNeighbor(Directions.LEFT, nodes[4][5]);
+		nodes[4][6].addNeighbor(Directions.UP, nodes[3][6]);
+		
+		nodes[4][7].addNeighbor(Directions.RIGHT, nodes[4][8]);
+		nodes[4][7].addNeighbor(Directions.UP, nodes[3][7]);
+		nodes[4][7].addNeighbor(Directions.DOWN, nodes[5][7]);
+		
+		nodes[4][8].addNeighbor(Directions.LEFT, nodes[4][7]);
+		nodes[4][8].addNeighbor(Directions.UP, nodes[3][8]);
+		nodes[4][8].addNeighbor(Directions.DOWN, nodes[5][8]);
+		
+		nodes[4][9].addNeighbor(Directions.UP, nodes[3][9]);
+		nodes[4][9].addNeighbor(Directions.DOWN, nodes[5][9]);
+		
+		nodes[5][0].addNeighbor(Directions.UP, nodes[4][0]);
+		nodes[5][0].addNeighbor(Directions.DOWN, nodes[6][0]);
+		
+		nodes[5][1].addNeighbor(Directions.RIGHT, nodes[5][2]);
+		nodes[5][1].addNeighbor(Directions.UP, nodes[5][1]);
+		
+		nodes[5][2].addNeighbor(Directions.LEFT, nodes[5][1]);
+		nodes[5][2].addNeighbor(Directions.UP, nodes[4][2]);
+		
+		nodes[5][3].addNeighbor(Directions.RIGHT, nodes[5][4]);
+		nodes[5][3].addNeighbor(Directions.DOWN, nodes[6][3]);
+		
+		nodes[5][4].addNeighbor(Directions.LEFT, nodes[5][3]);
+		nodes[5][4].addNeighbor(Directions.UP, nodes[4][4]);
+		
+		nodes[5][5].addNeighbor(Directions.RIGHT, nodes[5][6]);
+		nodes[5][5].addNeighbor(Directions.DOWN, nodes[6][5]);
+		
+		nodes[5][6].addNeighbor(Directions.LEFT, nodes[5][5]);
+		nodes[5][6].addNeighbor(Directions.RIGHT, nodes[5][7]);
+		
+		nodes[5][7].addNeighbor(Directions.LEFT, nodes[5][6]);
+		nodes[5][7].addNeighbor(Directions.UP, nodes[4][7]);
+		
+		nodes[5][8].addNeighbor(Directions.UP, nodes[4][8]);
+		
+		nodes[5][9].addNeighbor(Directions.UP, nodes[4][9]);
+		nodes[5][9].addNeighbor(Directions.DOWN, nodes[6][9]);
+		
+		nodes[6][0].addNeighbor(Directions.UP, nodes[5][0]);
+		
+		nodes[6][1].addNeighbor(Directions.RIGHT, nodes[6][2]);
+		
+		nodes[6][2].addNeighbor(Directions.LEFT, nodes[6][1]);
+		nodes[6][2].addNeighbor(Directions.DOWN, nodes[7][2]);
+		
+		nodes[6][3].addNeighbor(Directions.UP, nodes[5][3]);
+		nodes[6][3].addNeighbor(Directions.DOWN, nodes[7][3]);
+		
+		nodes[6][4].addNeighbor(Directions.DOWN, nodes[7][4]);
+		
+		nodes[6][5].addNeighbor(Directions.LEFT, nodes[6][6]);
+		nodes[6][5].addNeighbor(Directions.UP, nodes[5][5]);
+		
+		nodes[6][6].addNeighbor(Directions.LEFT, nodes[6][5]);
+		nodes[6][6].addNeighbor(Directions.RIGHT, nodes[6][7]);
+		
+		nodes[6][7].addNeighbor(Directions.LEFT, nodes[6][6]);
+		nodes[6][7].addNeighbor(Directions.DOWN, nodes[7][7]);
+		
+		nodes[6][8].addNeighbor(Directions.RIGHT, nodes[6][9]);
+		nodes[6][8].addNeighbor(Directions.DOWN, nodes[7][8]);
+		
+		nodes[6][9].addNeighbor(Directions.LEFT, nodes[6][8]);
+		nodes[6][9].addNeighbor(Directions.UP, nodes[5][9]);
+		
+		nodes[7][0].addNeighbor(Directions.RIGHT, nodes[7][1]);
+		nodes[7][0].addNeighbor(Directions.DOWN, nodes[8][0]);
+		
+		nodes[7][1].addNeighbor(Directions.LEFT, nodes[7][0]);
+		nodes[7][1].addNeighbor(Directions.RIGHT, nodes[7][2]);
+		
+		nodes[7][2].addNeighbor(Directions.LEFT, nodes[7][1]);
+		nodes[7][2].addNeighbor(Directions.RIGHT, nodes[7][3]);
+		nodes[7][2].addNeighbor(Directions.UP, nodes[6][2]);
+		
+		nodes[7][3].addNeighbor(Directions.LEFT, nodes[7][2]);
+		nodes[7][3].addNeighbor(Directions.RIGHT, nodes[7][4]);
+		nodes[7][3].addNeighbor(Directions.UP, nodes[6][3]);
+		
+		nodes[7][4].addNeighbor(Directions.LEFT, nodes[7][3]);
+		nodes[7][4].addNeighbor(Directions.RIGHT, nodes[7][5]);
+		nodes[7][4].addNeighbor(Directions.UP, nodes[6][4]);
+		
+		nodes[7][5].addNeighbor(Directions.LEFT, nodes[7][4]);
+		nodes[7][5].addNeighbor(Directions.DOWN, nodes[8][5]);
+
+		nodes[7][6].addNeighbor(Directions.RIGHT, nodes[7][7]);
+		
+		nodes[7][7].addNeighbor(Directions.LEFT, nodes[7][6]);
+		nodes[7][7].addNeighbor(Directions.UP, nodes[6][7]);
+		nodes[7][7].addNeighbor(Directions.DOWN, nodes[8][7]);
+		
+		nodes[7][8].addNeighbor(Directions.UP, nodes[6][8]);
+		nodes[7][8].addNeighbor(Directions.DOWN, nodes[8][8]);
+		
+		nodes[7][9].addNeighbor(Directions.DOWN, nodes[8][9]);
+		
+		nodes[8][0].addNeighbor(Directions.UP, nodes[7][0]);
+		nodes[8][0].addNeighbor(Directions.DOWN, nodes[9][0]);
+		
+		nodes[8][1].addNeighbor(Directions.DOWN, nodes[9][1]);
+		
+		nodes[8][2].addNeighbor(Directions.RIGHT, nodes[8][3]);
+		
+		nodes[8][3].addNeighbor(Directions.LEFT, nodes[8][2]);
+		nodes[8][3].addNeighbor(Directions.RIGHT, nodes[8][4]);
+		
+		nodes[8][4].addNeighbor(Directions.LEFT, nodes[8][3]);
+		nodes[8][4].addNeighbor(Directions.DOWN, nodes[9][4]);
+		
+		nodes[8][5].addNeighbor(Directions.RIGHT, nodes[8][6]);
+		nodes[8][5].addNeighbor(Directions.UP, nodes[7][5]);
+		
+		nodes[8][6].addNeighbor(Directions.LEFT, nodes[8][5]);
+		nodes[8][6].addNeighbor(Directions.RIGHT, nodes[8][7]);
+		
+		nodes[8][7].addNeighbor(Directions.LEFT, nodes[8][6]);
+		nodes[8][7].addNeighbor(Directions.UP, nodes[7][7]);
+		
+		nodes[8][8].addNeighbor(Directions.RIGHT, nodes[8][9]);
+		nodes[8][8].addNeighbor(Directions.UP, nodes[7][8]);
+		
+		nodes[8][9].addNeighbor(Directions.UP, nodes[7][9]);
+		nodes[8][9].addNeighbor(Directions.DOWN, nodes[9][9]);
+		
+		nodes[9][0].addNeighbor(Directions.RIGHT, nodes[9][1]);
+		nodes[9][0].addNeighbor(Directions.UP, nodes[8][0]);
+		
+		nodes[9][1].addNeighbor(Directions.LEFT, nodes[9][0]);
+		nodes[9][1].addNeighbor(Directions.RIGHT, nodes[9][2]);
+		nodes[9][1].addNeighbor(Directions.UP, nodes[8][1]);
+		
+		nodes[9][2].addNeighbor(Directions.LEFT, nodes[9][1]);
+		nodes[9][2].addNeighbor(Directions.RIGHT, nodes[9][3]);
+		
+		nodes[9][3].addNeighbor(Directions.LEFT, nodes[9][2]);
+		
+		nodes[9][4].addNeighbor(Directions.RIGHT, nodes[9][5]);
+		nodes[9][4].addNeighbor(Directions.UP, nodes[8][4]);
+		
+		nodes[9][5].addNeighbor(Directions.LEFT, nodes[9][4]);
+		nodes[9][5].addNeighbor(Directions.RIGHT, nodes[9][6]);
+		
+		nodes[9][6].addNeighbor(Directions.LEFT, nodes[9][5]);
+		nodes[9][6].addNeighbor(Directions.RIGHT, nodes[9][7]);
+		
+		nodes[9][7].addNeighbor(Directions.LEFT, nodes[9][6]);
+		nodes[9][7].addNeighbor(Directions.RIGHT, nodes[9][8]);
+		
+		nodes[9][8].addNeighbor(Directions.LEFT, nodes[9][7]);
+		nodes[9][8].addNeighbor(Directions.RIGHT, nodes[9][9]);
+		
+		nodes[9][9].addNeighbor(Directions.LEFT, nodes[9][8]);
+		nodes[9][9].addNeighbor(Directions.UP, nodes[8][9]);
 	}
 }
