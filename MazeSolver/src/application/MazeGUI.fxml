@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="500.0" maxWidth="500.0" minHeight="500.0" minWidth="500.0" onKeyPressed="#startMazeSolving" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MazeController">
+<AnchorPane maxHeight="555.0" maxWidth="500.0" prefHeight="555.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MazeController">
    <children>
-      <Pane layoutY="-7.0" maxHeight="500.0" maxWidth="500.0" minHeight="500.0" minWidth="500.0" prefHeight="500.0" prefWidth="500.0">
+      <Pane layoutY="-7.0" maxHeight="555.0" maxWidth="500.0" prefHeight="555.0" prefWidth="500.0">
          <children>
             <GridPane fx:id="mazeGrid" layoutX="15.0" layoutY="15.0" maxHeight="470.0" maxWidth="470.0" minHeight="470.0" minWidth="470.0" prefHeight="470.0" prefWidth="470.0" style="-: green;">
               <columnConstraints>
@@ -139,6 +139,7 @@
                   <Pane fx:id="pane99" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="9" />
                </children>
             </GridPane>
+            <Button fx:id="solveBtn" layoutX="225.0" layoutY="512.0" mnemonicParsing="false" onAction="#SolveMaze" text="Start" />
          </children>
       </Pane>
    </children>

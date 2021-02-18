@@ -3,341 +3,798 @@ package application;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Stack;
 import java.util.concurrent.TimeUnit;
 
 import org.w3c.dom.NodeList;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class MazeController implements Initializable{
-	
+
 	// Variables: 
-	
+	private MazeNode nodes[][];
+
 	private String visitedColor = "rgb(170, 88, 57)";
 	private String pathColor = "rgb(219, 64, 6)";
 	private String finalPathColor = "rgb(1, 144, 1)";
-	private Maze maze = Maze.getInstance();
+	private Stack<MazeNode> path;
 
     @FXML
-    protected static Pane pane23;
-    @FXML
-    protected static Pane pane22;
-    @FXML
-    protected static Pane pane25;
-    @FXML
-    protected static Pane pane24;
-    @FXML
-    protected static Pane pane27;
-    @FXML
-    protected static Pane pane26;
-    @FXML
-    protected static Pane pane29;
-    @FXML
-    protected static Pane pane28;
-    @FXML
-    protected static Pane pane21;
-    @FXML
-    protected static Pane pane20;
-    @FXML
-    protected static Pane pane12;
-    @FXML
-    protected static Pane pane11;
-
-    @FXML
-    protected static Pane pane99;
-
-    @FXML
-    protected static Pane pane14;
-
-    @FXML
-    protected static Pane pane13;
-
-    @FXML
-    protected static Pane pane16;
-
-    @FXML
-    protected static Pane pane15;
-
-    @FXML
-    protected static Pane pane18;
-
-    @FXML
-    protected static Pane pane17;
-
-    @FXML
-    protected static Pane pane92;
-
-    @FXML
-    protected static Pane pane91;
-
-    @FXML
-    protected static Pane pane94;
-
-    @FXML
-    protected static Pane pane93;
-
-    @FXML
-    protected static Pane pane96;
-
-    @FXML
-    protected static Pane pane95;
-
-    @FXML
-    protected static Pane pane10;
-
-    @FXML
-    protected static Pane pane98;
-
-    @FXML
-    protected static Pane pane97;
-
-    @FXML
-    protected static Pane pane19;
-
-    @FXML
-    protected static Pane pane45;
-
-    @FXML
-    protected static Pane pane44;
-
-    @FXML
-    protected static Pane pane47;
-
-    @FXML
-    protected static Pane pane46;
-
-    @FXML
-    protected static Pane pane49;
-
-    @FXML
-    protected static Pane pane48;
-
-    @FXML
-    protected static Pane pane41;
-
-    @FXML
-    protected static Pane pane40;
-
-    @FXML
-    protected static Pane pane43;
-
-    @FXML
-    protected static Pane pane42;
-
-    @FXML
-    private GridPane mazeGrid;
-
-    @FXML
-    protected static Pane pane34;
-
-    @FXML
-    protected static Pane pane33;
-
-    @FXML
-    protected static Pane pane36;
-
-    @FXML
-    protected static Pane pane35;
-
-    @FXML
-    protected static Pane pane38;
-
-    @FXML
-    protected static Pane pane37;
-
-    @FXML
-    protected static Pane pane39;
-
-    @FXML
-    protected static Pane pane30;
-
-    @FXML
-    protected static Pane pane32;
-
-    @FXML
-    protected static Pane pane31;
-
-    @FXML
-    protected static Pane pane67;
-
-    @FXML
-    protected static Pane pane66;
-
-    @FXML
-    protected static Pane pane69;
-
-    @FXML
-    protected static Pane pane68;
-
-    @FXML
-    protected static Pane pane61;
-
-    @FXML
-    protected static Pane pane60;
-
-    @FXML
-    protected static Pane pane63;
-
-    @FXML
-    protected static Pane pane62;
-
-    @FXML
-    protected static Pane pane65;
-
-    @FXML
-    protected static Pane pane64;
-
-    @FXML
-    protected static Pane pane56;
-
-    @FXML
-    protected static Pane pane55;
-
-    @FXML
-    protected static Pane pane58;
-
-    @FXML
-    protected static Pane pane57;
-
-    @FXML
-    protected static Pane pane59;
-
-    @FXML
-    protected static Pane pane50;
-
-    @FXML
-    protected static Pane pane52;
-
-    @FXML
-    protected static Pane pane51;
-
-    @FXML
-    protected static Pane pane54;
-
-    @FXML
-    protected static Pane pane53;
-
-    @FXML
-    protected static Pane pane01;
-
-    @FXML
-    protected static Pane pane89;
-
-    @FXML
-    protected static Pane pane06;
+    private Button solveBtn;
     
-    @FXML
-    protected static Pane pane00;
-
-    @FXML
-    protected static Pane pane88;
-
-    @FXML
-    protected static Pane pane03;
-
-    @FXML
-    protected static Pane pane02;
-
-    @FXML
-    protected static Pane pane05;
-
-    @FXML
-    protected static Pane pane04;
-
-    @FXML
-    protected static Pane pane07;
-
-    @FXML
-    protected static Pane pane81;
-
-    @FXML
-    protected static Pane pane80;
-
-    @FXML
-    protected static Pane pane83;
-
-    @FXML
-    protected static Pane pane82;
-
-    @FXML
-    protected static Pane pane85;
-
-    @FXML
-    protected static Pane pane84;
-
-    @FXML
-    protected static Pane pane87;
-
-    @FXML
-    protected static Pane pane86;
-
-    @FXML
-    protected static Pane pane90;
-
-    @FXML
-    protected static Pane pane09;
-
-    @FXML
-    protected static Pane pane08;
-
-    @FXML
-    protected static Pane pane78;
-
-    @FXML
-    protected static Pane pane77;
-
-    @FXML
-    protected static Pane pane79;
-
-    @FXML
-    protected static Pane pane70;
-
-    @FXML
-    protected static Pane pane72;
-
-    @FXML
-    protected static Pane pane71;
-
-    @FXML
-    protected static Pane pane74;
-
-    @FXML
-    protected static Pane pane73;
-
-    @FXML
-    protected static Pane pane76;
-
-    @FXML
-    protected static Pane pane75;
-
+	@FXML
+	private Pane pane23;
 	
+	@FXML
+	private Pane pane22;
+	
+	@FXML
+	private Pane pane25;
+	
+	@FXML
+	private Pane pane24;
+	
+	@FXML
+	private Pane pane27;
+	
+	@FXML
+	private Pane pane26;
+	
+	@FXML
+	private Pane pane29;
+	
+	@FXML
+	private Pane pane28;
+	
+	@FXML
+	private Pane pane21;
+	
+	@FXML
+	private Pane pane20;
+	
+	@FXML
+	private Pane pane12;
+	
+	@FXML
+	private Pane pane11;
+
+	@FXML
+	private Pane pane99;
+
+	@FXML
+	private Pane pane14;
+
+	@FXML
+	private Pane pane13;
+
+	@FXML
+	private Pane pane16;
+
+	@FXML
+	private Pane pane15;
+
+	@FXML
+	private Pane pane18;
+
+	@FXML
+	private Pane pane17;
+
+	@FXML
+	private Pane pane92;
+
+	@FXML
+	private Pane pane91;
+
+	@FXML
+	private Pane pane94;
+
+	@FXML
+	private Pane pane93;
+
+	@FXML
+	private Pane pane96;
+
+	@FXML
+	private Pane pane95;
+
+	@FXML
+	private Pane pane10;
+
+	@FXML
+	private Pane pane98;
+
+	@FXML
+	private Pane pane97;
+
+	@FXML
+	private Pane pane19;
+
+	@FXML
+	private Pane pane45;
+
+	@FXML
+	private Pane pane44;
+
+	@FXML
+	private Pane pane47;
+
+	@FXML
+	private Pane pane46;
+
+	@FXML
+	private Pane pane49;
+
+	@FXML
+	private Pane pane48;
+
+	@FXML
+	private Pane pane41;
+
+	@FXML
+	private Pane pane40;
+
+	@FXML
+	private Pane pane43;
+
+	@FXML
+	private Pane pane42;
+
+	@FXML
+	private GridPane mazeGrid;
+
+	@FXML
+	private Pane pane34;
+
+	@FXML
+	private Pane pane33;
+
+	@FXML
+	private Pane pane36;
+
+	@FXML
+	private Pane pane35;
+
+	@FXML
+	private Pane pane38;
+
+	@FXML
+	private Pane pane37;
+
+	@FXML
+	private Pane pane39;
+
+	@FXML
+	private Pane pane30;
+
+	@FXML
+	private Pane pane32;
+
+	@FXML
+	private Pane pane31;
+
+	@FXML
+	private Pane pane67;
+
+	@FXML
+	private Pane pane66;
+
+	@FXML
+	private Pane pane69;
+
+	@FXML
+	private Pane pane68;
+
+	@FXML
+	private Pane pane61;
+
+	@FXML
+	private Pane pane60;
+
+	@FXML
+	private Pane pane63;
+
+	@FXML
+	private Pane pane62;
+
+	@FXML
+	private Pane pane65;
+
+	@FXML
+	private Pane pane64;
+
+	@FXML
+	private Pane pane56;
+
+	@FXML
+	private Pane pane55;
+
+	@FXML
+	private Pane pane58;
+
+	@FXML
+	private Pane pane57;
+
+	@FXML
+	private Pane pane59;
+
+	@FXML
+	private Pane pane50;
+
+	@FXML
+	private Pane pane52;
+
+	@FXML
+	private Pane pane51;
+
+	@FXML
+	private Pane pane54;
+
+	@FXML
+	private Pane pane53;
+
+	@FXML
+	private Pane pane01;
+
+	@FXML
+	private Pane pane89;
+
+	@FXML
+	private Pane pane06;
+
+	@FXML
+	private Pane pane00;
+
+	@FXML
+	private Pane pane88;
+
+	@FXML
+	private Pane pane03;
+
+	@FXML
+	private Pane pane02;
+
+	@FXML
+	private Pane pane05;
+
+	@FXML
+	private Pane pane04;
+
+	@FXML
+	private Pane pane07;
+
+	@FXML
+	private Pane pane81;
+
+	@FXML
+	private Pane pane80;
+
+	@FXML
+	private Pane pane83;
+
+	@FXML
+	private Pane pane82;
+
+	@FXML
+	private Pane pane85;
+
+	@FXML
+	private Pane pane84;
+
+	@FXML
+	private Pane pane87;
+
+	@FXML
+	private Pane pane86;
+
+	@FXML
+	private Pane pane90;
+
+	@FXML
+	private Pane pane09;
+
+	@FXML
+	private Pane pane08;
+
+	@FXML
+	private Pane pane78;
+
+	@FXML
+	private Pane pane77;
+
+	@FXML
+	private Pane pane79;
+
+	@FXML
+	private Pane pane70;
+
+	@FXML
+	private Pane pane72;
+
+	@FXML
+	private Pane pane71;
+
+	@FXML
+	private Pane pane74;
+
+	@FXML
+	private Pane pane73;
+
+	@FXML
+	private Pane pane76;
+
+	@FXML
+	private Pane pane75;
+
+	/*public static void SolveMaze() {
+    	maze.SolveMaze();
+    }*/
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		nodes = new MazeNode[10][10];
+		initMazeNodes();
+		initNeighbors();
+		System.out.println(nodes[5][5].getNeighbors());
+		path = new Stack<MazeNode>();
+		path.push(nodes[0][0]);
+		changeColor(path.peek().getPane(), pathColor);
+
+	}
+
+	@FXML
+    void SolveMaze(ActionEvent event) {
+		solveBtn.setDisable(true);
+		move(Directions.DOWN);
+		move(Directions.DOWN);
+		move(Directions.DOWN);
+	}
+
+	public void move(Directions dir) {
+		MazeNode current = path.peek();
+		int i = current.getRow();
+		int j = current.getColumn();
+
+		switch(dir) {
+		case LEFT:
+			path.push(nodes[i][j-1]);
+			break;
+		case RIGHT:
+			path.push(nodes[i][j+1]);
+			break;
+		case UP:
+			path.push(nodes[i-1][j]);
+			break;
+		case DOWN:
+			path.push(nodes[i+1][j]);
+			break;
+		default:
+			// code block
+		}
+
+		current = path.peek();
+		changeColor(current.getPane(), pathColor);
+	}
+
+
 	public void changeColor(Pane p, String color) {
 		p.setStyle("-fx-background-color:" + color + ";");
 	}
-	
-	public void sleep(){
-		try {
-			TimeUnit.SECONDS.sleep(1);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 
-	
-	@FXML
-	void startMazeSolving(KeyEvent event) throws InterruptedException{
-		System.out.println("Something happend");
+	public void initMazeNodes() {
+		nodes[0][0] = new MazeNode(pane00 , 0, 0, NodeStatus.START);
+		nodes[0][1] = new MazeNode(pane01 , 0, 1, NodeStatus.REGULAR);
+		nodes[0][2] = new MazeNode(pane02 , 0, 2, NodeStatus.REGULAR);
+		nodes[0][3] = new MazeNode(pane03 , 0, 3, NodeStatus.REGULAR);
+		nodes[0][4] = new MazeNode(pane04 , 0, 4, NodeStatus.REGULAR);
+		nodes[0][5] = new MazeNode(pane05 , 0, 5, NodeStatus.REGULAR);
+		nodes[0][6] = new MazeNode(pane06 , 0, 6, NodeStatus.REGULAR);
+		nodes[0][7] = new MazeNode(pane07 , 0, 7, NodeStatus.REGULAR);
+		nodes[0][8] = new MazeNode(pane08 , 0, 8, NodeStatus.REGULAR);
+		nodes[0][9] = new MazeNode(pane09 , 0, 9, NodeStatus.REGULAR);
+
+		nodes[1][0] = new MazeNode(pane10 , 1, 0, NodeStatus.REGULAR);
+		nodes[1][1] = new MazeNode(pane11 , 1, 1, NodeStatus.REGULAR);
+		nodes[1][2] = new MazeNode(pane12 , 1, 2, NodeStatus.REGULAR);
+		nodes[1][3] = new MazeNode(pane13 , 1, 3, NodeStatus.REGULAR);
+		nodes[1][4] = new MazeNode(pane14 , 1, 4, NodeStatus.REGULAR);
+		nodes[1][5] = new MazeNode(pane15 , 1, 5, NodeStatus.REGULAR);
+		nodes[1][6] = new MazeNode(pane16 , 1, 6, NodeStatus.REGULAR);
+		nodes[1][7] = new MazeNode(pane17 , 1, 7, NodeStatus.REGULAR);
+		nodes[1][8] = new MazeNode(pane18 , 1, 8, NodeStatus.REGULAR);
+		nodes[1][9] = new MazeNode(pane19 , 1, 9, NodeStatus.REGULAR);
+
+		nodes[2][0] = new MazeNode(pane20 , 2, 0, NodeStatus.REGULAR);
+		nodes[2][1] = new MazeNode(pane21 , 2, 1, NodeStatus.REGULAR);
+		nodes[2][2] = new MazeNode(pane22 , 2, 2, NodeStatus.REGULAR);
+		nodes[2][3] = new MazeNode(pane23 , 2, 3, NodeStatus.REGULAR);
+		nodes[2][4] = new MazeNode(pane24 , 2, 4, NodeStatus.REGULAR);
+		nodes[2][5] = new MazeNode(pane25 , 2, 5, NodeStatus.REGULAR);
+		nodes[2][6] = new MazeNode(pane26 , 2, 6, NodeStatus.REGULAR);
+		nodes[2][7] = new MazeNode(pane27 , 2, 7, NodeStatus.REGULAR);
+		nodes[2][8] = new MazeNode(pane28 , 2, 8, NodeStatus.REGULAR);
+		nodes[2][9] = new MazeNode(pane29 , 2, 9, NodeStatus.REGULAR);
+
+		nodes[3][0] = new MazeNode(pane30 , 3, 0, NodeStatus.REGULAR);
+		nodes[3][1] = new MazeNode(pane31 , 3, 1, NodeStatus.REGULAR);
+		nodes[3][2] = new MazeNode(pane32 , 3, 2, NodeStatus.REGULAR);
+		nodes[3][3] = new MazeNode(pane33 , 3, 3, NodeStatus.REGULAR);
+		nodes[3][4] = new MazeNode(pane34 , 3, 4, NodeStatus.REGULAR);
+		nodes[3][5] = new MazeNode(pane35 , 3, 5, NodeStatus.REGULAR);
+		nodes[3][6] = new MazeNode(pane36 , 3, 6, NodeStatus.REGULAR);
+		nodes[3][7] = new MazeNode(pane37 , 3, 7, NodeStatus.REGULAR);
+		nodes[3][8] = new MazeNode(pane38 , 3, 8, NodeStatus.REGULAR);
+		nodes[3][9] = new MazeNode(pane39 , 3, 9, NodeStatus.REGULAR);
+
+		nodes[4][0] = new MazeNode(pane40 , 4, 0, NodeStatus.REGULAR);
+		nodes[4][1] = new MazeNode(pane41 , 4, 1, NodeStatus.REGULAR);
+		nodes[4][2] = new MazeNode(pane42 , 4, 2, NodeStatus.REGULAR);
+		nodes[4][3] = new MazeNode(pane43 , 4, 3, NodeStatus.REGULAR);
+		nodes[4][4] = new MazeNode(pane44 , 4, 4, NodeStatus.REGULAR);
+		nodes[4][5] = new MazeNode(pane45 , 4, 5, NodeStatus.REGULAR);
+		nodes[4][6] = new MazeNode(pane46 , 4, 6, NodeStatus.REGULAR);
+		nodes[4][7] = new MazeNode(pane47 , 4, 7, NodeStatus.REGULAR);
+		nodes[4][8] = new MazeNode(pane48 , 4, 8, NodeStatus.REGULAR);
+		nodes[4][9] = new MazeNode(pane49 , 4, 9, NodeStatus.REGULAR);
+
+		nodes[5][0] = new MazeNode(pane50 , 5, 0, NodeStatus.REGULAR);
+		nodes[5][1] = new MazeNode(pane51 , 5, 1, NodeStatus.REGULAR);
+		nodes[5][2] = new MazeNode(pane52 , 5, 2, NodeStatus.REGULAR);
+		nodes[5][3] = new MazeNode(pane53 , 5, 3, NodeStatus.REGULAR);
+		nodes[5][4] = new MazeNode(pane54 , 5, 4, NodeStatus.REGULAR);
+		nodes[5][5] = new MazeNode(pane55 , 5, 5, NodeStatus.REGULAR);
+		nodes[5][6] = new MazeNode(pane56 , 5, 6, NodeStatus.REGULAR);
+		nodes[5][7] = new MazeNode(pane57 , 5, 7, NodeStatus.REGULAR);
+		nodes[5][8] = new MazeNode(pane58 , 5, 8, NodeStatus.REGULAR);
+		nodes[5][9] = new MazeNode(pane59 , 5, 9, NodeStatus.REGULAR);
+
+		nodes[6][0] = new MazeNode(pane60 , 6, 0, NodeStatus.REGULAR);
+		nodes[6][1] = new MazeNode(pane61 , 6, 1, NodeStatus.REGULAR);
+		nodes[6][2] = new MazeNode(pane62 , 6, 2, NodeStatus.REGULAR);
+		nodes[6][3] = new MazeNode(pane63 , 6, 3, NodeStatus.REGULAR);
+		nodes[6][4] = new MazeNode(pane64 , 6, 4, NodeStatus.REGULAR);
+		nodes[6][5] = new MazeNode(pane65 , 6, 5, NodeStatus.REGULAR);
+		nodes[6][6] = new MazeNode(pane66 , 6, 6, NodeStatus.REGULAR);
+		nodes[6][7] = new MazeNode(pane67 , 6, 7, NodeStatus.REGULAR);
+		nodes[6][8] = new MazeNode(pane68 , 6, 8, NodeStatus.REGULAR);
+		nodes[6][9] = new MazeNode(pane69 , 6, 9, NodeStatus.REGULAR);
+
+		nodes[7][0] = new MazeNode(pane70 , 7, 0, NodeStatus.REGULAR);
+		nodes[7][1] = new MazeNode(pane71 , 7, 1, NodeStatus.REGULAR);
+		nodes[7][2] = new MazeNode(pane72 , 7, 2, NodeStatus.REGULAR);
+		nodes[7][3] = new MazeNode(pane73 , 7, 3, NodeStatus.REGULAR);
+		nodes[7][4] = new MazeNode(pane74 , 7, 4, NodeStatus.REGULAR);
+		nodes[7][5] = new MazeNode(pane75 , 7, 5, NodeStatus.REGULAR);
+		nodes[7][6] = new MazeNode(pane76 , 7, 6, NodeStatus.REGULAR);
+		nodes[7][7] = new MazeNode(pane77 , 7, 7, NodeStatus.REGULAR);
+		nodes[7][8] = new MazeNode(pane78 , 7, 8, NodeStatus.REGULAR);
+		nodes[7][9] = new MazeNode(pane79 , 7, 9, NodeStatus.REGULAR);
+
+		nodes[8][0] = new MazeNode(pane80 , 8, 0, NodeStatus.REGULAR);
+		nodes[8][1] = new MazeNode(pane81 , 8, 1, NodeStatus.REGULAR);
+		nodes[8][2] = new MazeNode(pane82 , 8, 2, NodeStatus.REGULAR);
+		nodes[8][3] = new MazeNode(pane83 , 8, 3, NodeStatus.REGULAR);
+		nodes[8][4] = new MazeNode(pane84 , 8, 4, NodeStatus.REGULAR);
+		nodes[8][5] = new MazeNode(pane85 , 8, 5, NodeStatus.REGULAR);
+		nodes[8][6] = new MazeNode(pane86 , 8, 6, NodeStatus.REGULAR);
+		nodes[8][7] = new MazeNode(pane87 , 8, 7, NodeStatus.REGULAR);
+		nodes[8][8] = new MazeNode(pane88 , 8, 8, NodeStatus.REGULAR);
+		nodes[8][9] = new MazeNode(pane89 , 8, 9, NodeStatus.REGULAR);
+
+		nodes[9][0] = new MazeNode(pane90 , 9, 0, NodeStatus.REGULAR);
+		nodes[9][1] = new MazeNode(pane91 , 9, 1, NodeStatus.REGULAR);
+		nodes[9][2] = new MazeNode(pane92 , 9, 2, NodeStatus.REGULAR);
+		nodes[9][3] = new MazeNode(pane93 , 9, 3, NodeStatus.REGULAR);
+		nodes[9][4] = new MazeNode(pane94 , 9, 4, NodeStatus.REGULAR);
+		nodes[9][5] = new MazeNode(pane95 , 9, 5, NodeStatus.REGULAR);
+		nodes[9][6] = new MazeNode(pane96 , 9, 6, NodeStatus.REGULAR);
+		nodes[9][7] = new MazeNode(pane97 , 9, 7, NodeStatus.REGULAR);
+		nodes[9][8] = new MazeNode(pane98 , 9, 8, NodeStatus.REGULAR);
+		nodes[9][9] = new MazeNode(pane99 , 9, 9, NodeStatus.FINISH);
 	}
-	
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		
+
+	public void initNeighbors() {
+		nodes[0][0].addNeighbor(Directions.DOWN, nodes[1][0]);
+
+		nodes[0][1].addNeighbor(Directions.DOWN, nodes[1][1]);
+
+		nodes[0][2].addNeighbor(Directions.RIGHT, nodes[0][3]);
+		nodes[0][2].addNeighbor(Directions.DOWN, nodes[1][2]);
+
+		nodes[0][3].addNeighbor(Directions.LEFT, nodes[0][2]);
+		nodes[0][3].addNeighbor(Directions.RIGHT, nodes[0][4]);
+
+		nodes[0][4].addNeighbor(Directions.LEFT, nodes[0][3]);
+		nodes[0][4].addNeighbor(Directions.RIGHT, nodes[0][5]);
+		nodes[0][4].addNeighbor(Directions.DOWN, nodes[1][4]);
+
+		nodes[0][5].addNeighbor(Directions.LEFT, nodes[0][4]);
+		nodes[0][5].addNeighbor(Directions.RIGHT, nodes[0][6]);
+
+		nodes[0][6].addNeighbor(Directions.LEFT, nodes[0][5]);
+		nodes[0][6].addNeighbor(Directions.DOWN, nodes[1][6]);
+
+		nodes[0][7].addNeighbor(Directions.RIGHT, nodes[0][8]);
+		nodes[0][7].addNeighbor(Directions.DOWN, nodes[1][7]);
+
+		nodes[0][8].addNeighbor(Directions.LEFT, nodes[0][7]);
+		nodes[0][8].addNeighbor(Directions.RIGHT, nodes[0][9]);
+
+		nodes[0][9].addNeighbor(Directions.LEFT, nodes[0][8]);
+		nodes[0][9].addNeighbor(Directions.DOWN, nodes[1][9]);
+
+		nodes[1][0].addNeighbor(Directions.RIGHT, nodes[1][1]);
+		nodes[1][0].addNeighbor(Directions.UP, nodes[0][0]);
+
+		nodes[1][1].addNeighbor(Directions.LEFT, nodes[1][0]);
+		nodes[1][1].addNeighbor(Directions.UP, nodes[0][1]);
+
+		nodes[1][2].addNeighbor(Directions.RIGHT, nodes[1][3]);
+		nodes[1][2].addNeighbor(Directions.UP, nodes[0][2]);
+
+		nodes[1][3].addNeighbor(Directions.LEFT, nodes[1][2]);
+		nodes[1][3].addNeighbor(Directions.DOWN, nodes[2][3]);
+
+		nodes[1][4].addNeighbor(Directions.UP, nodes[0][4]);
+		nodes[1][4].addNeighbor(Directions.DOWN, nodes[2][4]);
+
+		nodes[1][5].addNeighbor(Directions.DOWN, nodes[2][5]);
+
+		nodes[1][6].addNeighbor(Directions.UP, nodes[0][6]);
+		nodes[1][6].addNeighbor(Directions.DOWN, nodes[2][6]);
+
+		nodes[1][7].addNeighbor(Directions.UP, nodes[0][7]);
+		nodes[1][7].addNeighbor(Directions.DOWN, nodes[2][7]);
+
+		nodes[1][8].addNeighbor(Directions.UP, nodes[2][8]);
+
+		nodes[1][9].addNeighbor(Directions.UP, nodes[0][9]);
+		nodes[1][9].addNeighbor(Directions.DOWN, nodes[2][9]);
+
+		nodes[2][0].addNeighbor(Directions.UP, nodes[1][0]);
+		nodes[2][0].addNeighbor(Directions.DOWN, nodes[3][0]);
+
+		nodes[2][1].addNeighbor(Directions.RIGHT, nodes[2][2]);
+		nodes[2][1].addNeighbor(Directions.DOWN, nodes[3][1]);
+
+		nodes[2][2].addNeighbor(Directions.LEFT, nodes[2][1]);
+		nodes[2][2].addNeighbor(Directions.RIGHT, nodes[2][3]);
+		nodes[2][2].addNeighbor(Directions.DOWN, nodes[3][2]);
+
+		nodes[2][3].addNeighbor(Directions.LEFT, nodes[2][2]);
+		nodes[2][3].addNeighbor(Directions.UP, nodes[1][3]);
+
+		nodes[2][4].addNeighbor(Directions.RIGHT, nodes[2][5]);
+		nodes[2][4].addNeighbor(Directions.UP, nodes[1][4]);
+
+		nodes[2][5].addNeighbor(Directions.LEFT, nodes[2][4]);
+		nodes[2][5].addNeighbor(Directions.UP, nodes[1][5]);
+
+		nodes[2][6].addNeighbor(Directions.UP, nodes[1][6]);
+		nodes[2][6].addNeighbor(Directions.DOWN, nodes[3][6]);
+
+		nodes[2][7].addNeighbor(Directions.RIGHT, nodes[2][8]);
+		nodes[2][7].addNeighbor(Directions.UP, nodes[1][7]);
+
+		nodes[2][8].addNeighbor(Directions.LEFT, nodes[2][7]);
+		nodes[2][8].addNeighbor(Directions.UP, nodes[1][8]);
+
+		nodes[2][9].addNeighbor(Directions.UP, nodes[1][9]);
+		nodes[2][9].addNeighbor(Directions.DOWN, nodes[3][9]);
+
+		nodes[3][0].addNeighbor(Directions.UP, nodes[2][0]);
+		nodes[3][0].addNeighbor(Directions.DOWN, nodes[4][0]);
+
+		nodes[3][1].addNeighbor(Directions.UP, nodes[2][1]);
+		nodes[3][1].addNeighbor(Directions.DOWN, nodes[4][1]);
+
+		nodes[3][2].addNeighbor(Directions.UP, nodes[2][2]);
+
+		nodes[3][3].addNeighbor(Directions.RIGHT, nodes[3][4]);
+
+		nodes[3][4].addNeighbor(Directions.LEFT, nodes[3][3]);
+		nodes[3][4].addNeighbor(Directions.RIGHT, nodes[3][5]);
+
+		nodes[3][5].addNeighbor(Directions.LEFT, nodes[3][4]);
+		nodes[3][5].addNeighbor(Directions.RIGHT, nodes[3][6]);
+
+		nodes[3][6].addNeighbor(Directions.LEFT, nodes[3][5]);
+		nodes[3][6].addNeighbor(Directions.UP, nodes[2][6]);
+		nodes[3][6].addNeighbor(Directions.DOWN, nodes[4][6]);
+
+		nodes[3][7].addNeighbor(Directions.DOWN, nodes[4][7]);
+
+		nodes[3][8].addNeighbor(Directions.UP, nodes[2][8]);
+		nodes[3][8].addNeighbor(Directions.DOWN, nodes[4][8]);
+
+		nodes[3][9].addNeighbor(Directions.UP, nodes[2][9]);
+		nodes[3][9].addNeighbor(Directions.DOWN, nodes[4][9]);
+
+		nodes[4][0].addNeighbor(Directions.RIGHT, nodes[4][1]);
+		nodes[4][0].addNeighbor(Directions.UP, nodes[3][0]);
+		nodes[4][0].addNeighbor(Directions.DOWN, nodes[5][0]);
+
+		nodes[4][1].addNeighbor(Directions.LEFT, nodes[4][0]);
+		nodes[4][1].addNeighbor(Directions.UP, nodes[3][1]);
+		nodes[4][1].addNeighbor(Directions.DOWN, nodes[5][1]);
+
+		nodes[4][2].addNeighbor(Directions.RIGHT, nodes[4][3]);
+		nodes[4][2].addNeighbor(Directions.DOWN, nodes[5][2]);
+
+		nodes[4][3].addNeighbor(Directions.LEFT, nodes[4][2]);
+
+		nodes[4][4].addNeighbor(Directions.RIGHT, nodes[4][5]);
+		nodes[4][4].addNeighbor(Directions.DOWN, nodes[5][4]);
+
+		nodes[4][5].addNeighbor(Directions.LEFT, nodes[4][4]);
+		nodes[4][5].addNeighbor(Directions.RIGHT, nodes[4][6]);
+
+		nodes[4][6].addNeighbor(Directions.LEFT, nodes[4][5]);
+		nodes[4][6].addNeighbor(Directions.UP, nodes[3][6]);
+
+		nodes[4][7].addNeighbor(Directions.RIGHT, nodes[4][8]);
+		nodes[4][7].addNeighbor(Directions.UP, nodes[3][7]);
+		nodes[4][7].addNeighbor(Directions.DOWN, nodes[5][7]);
+
+		nodes[4][8].addNeighbor(Directions.LEFT, nodes[4][7]);
+		nodes[4][8].addNeighbor(Directions.UP, nodes[3][8]);
+		nodes[4][8].addNeighbor(Directions.DOWN, nodes[5][8]);
+
+		nodes[4][9].addNeighbor(Directions.UP, nodes[3][9]);
+		nodes[4][9].addNeighbor(Directions.DOWN, nodes[5][9]);
+
+		nodes[5][0].addNeighbor(Directions.UP, nodes[4][0]);
+		nodes[5][0].addNeighbor(Directions.DOWN, nodes[6][0]);
+
+		nodes[5][1].addNeighbor(Directions.RIGHT, nodes[5][2]);
+		nodes[5][1].addNeighbor(Directions.UP, nodes[5][1]);
+
+		nodes[5][2].addNeighbor(Directions.LEFT, nodes[5][1]);
+		nodes[5][2].addNeighbor(Directions.UP, nodes[4][2]);
+
+		nodes[5][3].addNeighbor(Directions.RIGHT, nodes[5][4]);
+		nodes[5][3].addNeighbor(Directions.DOWN, nodes[6][3]);
+
+		nodes[5][4].addNeighbor(Directions.LEFT, nodes[5][3]);
+		nodes[5][4].addNeighbor(Directions.UP, nodes[4][4]);
+
+		nodes[5][5].addNeighbor(Directions.RIGHT, nodes[5][6]);
+		nodes[5][5].addNeighbor(Directions.DOWN, nodes[6][5]);
+
+		nodes[5][6].addNeighbor(Directions.LEFT, nodes[5][5]);
+		nodes[5][6].addNeighbor(Directions.RIGHT, nodes[5][7]);
+
+		nodes[5][7].addNeighbor(Directions.LEFT, nodes[5][6]);
+		nodes[5][7].addNeighbor(Directions.UP, nodes[4][7]);
+
+		nodes[5][8].addNeighbor(Directions.UP, nodes[4][8]);
+
+		nodes[5][9].addNeighbor(Directions.UP, nodes[4][9]);
+		nodes[5][9].addNeighbor(Directions.DOWN, nodes[6][9]);
+
+		nodes[6][0].addNeighbor(Directions.UP, nodes[5][0]);
+
+		nodes[6][1].addNeighbor(Directions.RIGHT, nodes[6][2]);
+
+		nodes[6][2].addNeighbor(Directions.LEFT, nodes[6][1]);
+		nodes[6][2].addNeighbor(Directions.DOWN, nodes[7][2]);
+
+		nodes[6][3].addNeighbor(Directions.UP, nodes[5][3]);
+		nodes[6][3].addNeighbor(Directions.DOWN, nodes[7][3]);
+
+		nodes[6][4].addNeighbor(Directions.DOWN, nodes[7][4]);
+
+		nodes[6][5].addNeighbor(Directions.LEFT, nodes[6][6]);
+		nodes[6][5].addNeighbor(Directions.UP, nodes[5][5]);
+
+		nodes[6][6].addNeighbor(Directions.LEFT, nodes[6][5]);
+		nodes[6][6].addNeighbor(Directions.RIGHT, nodes[6][7]);
+
+		nodes[6][7].addNeighbor(Directions.LEFT, nodes[6][6]);
+		nodes[6][7].addNeighbor(Directions.DOWN, nodes[7][7]);
+
+		nodes[6][8].addNeighbor(Directions.RIGHT, nodes[6][9]);
+		nodes[6][8].addNeighbor(Directions.DOWN, nodes[7][8]);
+
+		nodes[6][9].addNeighbor(Directions.LEFT, nodes[6][8]);
+		nodes[6][9].addNeighbor(Directions.UP, nodes[5][9]);
+
+		nodes[7][0].addNeighbor(Directions.RIGHT, nodes[7][1]);
+		nodes[7][0].addNeighbor(Directions.DOWN, nodes[8][0]);
+
+		nodes[7][1].addNeighbor(Directions.LEFT, nodes[7][0]);
+		nodes[7][1].addNeighbor(Directions.RIGHT, nodes[7][2]);
+
+		nodes[7][2].addNeighbor(Directions.LEFT, nodes[7][1]);
+		nodes[7][2].addNeighbor(Directions.RIGHT, nodes[7][3]);
+		nodes[7][2].addNeighbor(Directions.UP, nodes[6][2]);
+
+		nodes[7][3].addNeighbor(Directions.LEFT, nodes[7][2]);
+		nodes[7][3].addNeighbor(Directions.RIGHT, nodes[7][4]);
+		nodes[7][3].addNeighbor(Directions.UP, nodes[6][3]);
+
+		nodes[7][4].addNeighbor(Directions.LEFT, nodes[7][3]);
+		nodes[7][4].addNeighbor(Directions.RIGHT, nodes[7][5]);
+		nodes[7][4].addNeighbor(Directions.UP, nodes[6][4]);
+
+		nodes[7][5].addNeighbor(Directions.LEFT, nodes[7][4]);
+		nodes[7][5].addNeighbor(Directions.DOWN, nodes[8][5]);
+
+		nodes[7][6].addNeighbor(Directions.RIGHT, nodes[7][7]);
+
+		nodes[7][7].addNeighbor(Directions.LEFT, nodes[7][6]);
+		nodes[7][7].addNeighbor(Directions.UP, nodes[6][7]);
+		nodes[7][7].addNeighbor(Directions.DOWN, nodes[8][7]);
+
+		nodes[7][8].addNeighbor(Directions.UP, nodes[6][8]);
+		nodes[7][8].addNeighbor(Directions.DOWN, nodes[8][8]);
+
+		nodes[7][9].addNeighbor(Directions.DOWN, nodes[8][9]);
+
+		nodes[8][0].addNeighbor(Directions.UP, nodes[7][0]);
+		nodes[8][0].addNeighbor(Directions.DOWN, nodes[9][0]);
+
+		nodes[8][1].addNeighbor(Directions.DOWN, nodes[9][1]);
+
+		nodes[8][2].addNeighbor(Directions.RIGHT, nodes[8][3]);
+
+		nodes[8][3].addNeighbor(Directions.LEFT, nodes[8][2]);
+		nodes[8][3].addNeighbor(Directions.RIGHT, nodes[8][4]);
+
+		nodes[8][4].addNeighbor(Directions.LEFT, nodes[8][3]);
+		nodes[8][4].addNeighbor(Directions.DOWN, nodes[9][4]);
+
+		nodes[8][5].addNeighbor(Directions.RIGHT, nodes[8][6]);
+		nodes[8][5].addNeighbor(Directions.UP, nodes[7][5]);
+
+		nodes[8][6].addNeighbor(Directions.LEFT, nodes[8][5]);
+		nodes[8][6].addNeighbor(Directions.RIGHT, nodes[8][7]);
+
+		nodes[8][7].addNeighbor(Directions.LEFT, nodes[8][6]);
+		nodes[8][7].addNeighbor(Directions.UP, nodes[7][7]);
+
+		nodes[8][8].addNeighbor(Directions.RIGHT, nodes[8][9]);
+		nodes[8][8].addNeighbor(Directions.UP, nodes[7][8]);
+
+		nodes[8][9].addNeighbor(Directions.UP, nodes[7][9]);
+		nodes[8][9].addNeighbor(Directions.DOWN, nodes[9][9]);
+
+		nodes[9][0].addNeighbor(Directions.RIGHT, nodes[9][1]);
+		nodes[9][0].addNeighbor(Directions.UP, nodes[8][0]);
+
+		nodes[9][1].addNeighbor(Directions.LEFT, nodes[9][0]);
+		nodes[9][1].addNeighbor(Directions.RIGHT, nodes[9][2]);
+		nodes[9][1].addNeighbor(Directions.UP, nodes[8][1]);
+
+		nodes[9][2].addNeighbor(Directions.LEFT, nodes[9][1]);
+		nodes[9][2].addNeighbor(Directions.RIGHT, nodes[9][3]);
+
+		nodes[9][3].addNeighbor(Directions.LEFT, nodes[9][2]);
+
+		nodes[9][4].addNeighbor(Directions.RIGHT, nodes[9][5]);
+		nodes[9][4].addNeighbor(Directions.UP, nodes[8][4]);
+
+		nodes[9][5].addNeighbor(Directions.LEFT, nodes[9][4]);
+		nodes[9][5].addNeighbor(Directions.RIGHT, nodes[9][6]);
+
+		nodes[9][6].addNeighbor(Directions.LEFT, nodes[9][5]);
+		nodes[9][6].addNeighbor(Directions.RIGHT, nodes[9][7]);
+
+		nodes[9][7].addNeighbor(Directions.LEFT, nodes[9][6]);
+		nodes[9][7].addNeighbor(Directions.RIGHT, nodes[9][8]);
+
+		nodes[9][8].addNeighbor(Directions.LEFT, nodes[9][7]);
+		nodes[9][8].addNeighbor(Directions.RIGHT, nodes[9][9]);
+
+		nodes[9][9].addNeighbor(Directions.LEFT, nodes[9][8]);
+		nodes[9][9].addNeighbor(Directions.UP, nodes[8][9]);
 	}
 
 }
