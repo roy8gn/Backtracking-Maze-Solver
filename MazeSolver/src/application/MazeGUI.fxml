@@ -139,7 +139,7 @@
                   <Pane fx:id="pane99" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="9" />
                </children>
             </GridPane>
-            <Button fx:id="solveBtn" layoutX="225.0" layoutY="512.0" mnemonicParsing="false" onAction="#SolveMaze" text="Start" />
+            <Button fx:id="solveBtn" layoutX="225.0" layoutY="499.0" mnemonicParsing="false" onAction="#SolveMaze" text="Start" />
          </children>
       </Pane>
    </children>

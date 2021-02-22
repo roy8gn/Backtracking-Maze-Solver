@@ -2,6 +2,7 @@ package application;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.Stack;
 import java.util.concurrent.TimeUnit;
@@ -25,8 +26,161 @@ public class MazeController implements Initializable{
 	private String pathColor = "rgb(219, 64, 6)";
 	private String finalPathColor = "rgb(1, 144, 1)";
 	private Stack<MazeNode> path;
+	private MazeNode current; // Head of the Stack
+	
 
-    @FXML
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		nodes = new MazeNode[10][10];
+		initMazeNodes();
+		initNeighbors();
+		path = new Stack<MazeNode>();
+		goTo(nodes[0][0]);
+	}
+
+
+	@FXML
+    void SolveMaze(ActionEvent event) {
+		// Available neighbors of a certain node
+		HashMap<Directions, MazeNode> availableNeighbors;
+		
+		// Azimuth from a certain node to the end of the maze
+		float azimuth;
+		
+		// prioritized Directions for a node by his azimuth to the end
+		ArrayList<Directions> prioritizeDirections; 
+		
+		solveBtn.setDisable(true);
+		
+		while(current.getStatus()!=NodeStatus.FINISH) {
+			availableNeighbors = availableNeighbors(current);
+			azimuth = calculateDirection(current.getRow(), current.getColumn()); 
+			prioritizeDirections = prioritizeDirections(azimuth);
+			prioritize(availableNeighbors, prioritizeDirections); // take a step in the maze	
+		}			
+	}
+	
+	
+	public void prioritize(HashMap<Directions, MazeNode> availableNeighbors,
+			ArrayList<Directions> prioritizeDirections) {
+		if(availableNeighbors.size()==0) {
+			goBack();
+		}
+		else {
+			if(availableNeighbors.size()==1) {
+				MazeNode onlyNeighbor = (MazeNode) availableNeighbors.values().toArray()[0];
+				goTo(onlyNeighbor);
+			}
+			else {
+				for(Directions d:prioritizeDirections) {
+					if(availableNeighbors.get(d)!=null && !availableNeighbors.get(d).isVisited()) {
+						goTo(current.getNeighbors().get(d));
+						return;
+					}
+				}
+			}
+		}
+	}
+	
+	public HashMap<Directions, MazeNode> availableNeighbors(MazeNode m) { // return the available neighbors of a node
+		HashMap<Directions, MazeNode> neighbors = m.getNeighbors();
+		HashMap<Directions, MazeNode> availableNeighbors = new HashMap<Directions, MazeNode>();
+		
+		if(neighbors.get(Directions.LEFT)!=null && !neighbors.get(Directions.LEFT).isVisited()) {
+			availableNeighbors.put(Directions.LEFT, neighbors.get(Directions.LEFT));
+		}
+		if(neighbors.get(Directions.RIGHT)!=null &&  !neighbors.get(Directions.RIGHT).isVisited()) {
+			availableNeighbors.put(Directions.RIGHT, neighbors.get(Directions.RIGHT));
+		}
+		if(neighbors.get(Directions.UP)!=null &&  !neighbors.get(Directions.UP).isVisited()) {
+			availableNeighbors.put(Directions.UP, neighbors.get(Directions.UP));
+		}
+		if(neighbors.get(Directions.DOWN)!=null &&  !neighbors.get(Directions.DOWN).isVisited()) {
+			availableNeighbors.put(Directions.DOWN, neighbors.get(Directions.DOWN));
+		}
+		
+		return availableNeighbors;
+	}
+	
+	public void updateCurrent() { // Update the current head of the Stack
+		current = path.peek();
+	}
+	
+	public void goTo(MazeNode m) { // Go to a Node
+		m.setVisited(true);
+		changeColor(m.getPane(), pathColor);
+		path.push(m);
+		updateCurrent();
+		//delay();
+	}
+	
+	public void delay() {
+		try {
+			TimeUnit.SECONDS.sleep(1);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			System.out.println("ERROR while sleeping");
+		}
+	}
+	
+	public void goBack() { // Go back to the previous Node
+		changeColor(path.peek().getPane(), visitedColor);
+		path.pop();
+		updateCurrent();
+	}
+	
+	public float calculateDirection(int x, int y) { // calculate the azimuth from a node to the end of the maze
+	    float angle = (float) Math.toDegrees(Math.atan2(9 - y, 9 - x));
+	    
+	    if(angle < 0){
+	        angle += 360;
+	    }
+
+	    return angle;
+	}
+	
+	public ArrayList<Directions> prioritizeDirections(float deg){ // Prioritize the directions for each Node
+		float degree = deg;
+		ArrayList<Directions> priorities = new ArrayList<Directions>();
+		
+		priorities.add(degreeToDirection(degree));
+		priorities.add(degreeToDirection(degree+90));
+		priorities.add(degreeToDirection(degree-90));
+		priorities.add(degreeToDirection(degree-180));
+		
+		return priorities;
+	}
+	
+	public Directions degreeToDirection(float deg) { // convert a degree to direction
+		if(deg<0) {
+			deg += 360;
+		}
+		if((deg>=315 && deg<=360) || (deg>=0 && deg<45)) {
+			return Directions.RIGHT;
+		}
+		else {
+			if(deg>=45 && deg<135) {
+				return Directions.DOWN;
+			}
+			else {
+				if(deg>=135 && deg<225) {
+					return Directions.LEFT;
+				}
+				else {
+					if(deg>=225 && deg<315) {
+						return Directions.UP;
+					}
+				}
+			}
+		}
+		return null;
+	}
+	
+	public void changeColor(Pane p, String color) { // change the color of a node in the maze
+		p.setStyle("-fx-background-color:" + color + ";");
+	}
+	
+	@FXML
     private Button solveBtn;
     
 	@FXML
@@ -332,61 +486,6 @@ public class MazeController implements Initializable{
 	@FXML
 	private Pane pane75;
 
-	/*public static void SolveMaze() {
-    	maze.SolveMaze();
-    }*/
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		nodes = new MazeNode[10][10];
-		initMazeNodes();
-		initNeighbors();
-		System.out.println(nodes[5][5].getNeighbors());
-		path = new Stack<MazeNode>();
-		path.push(nodes[0][0]);
-		changeColor(path.peek().getPane(), pathColor);
-
-	}
-
-	@FXML
-    void SolveMaze(ActionEvent event) {
-		solveBtn.setDisable(true);
-		move(Directions.DOWN);
-		move(Directions.DOWN);
-		move(Directions.DOWN);
-	}
-
-	public void move(Directions dir) {
-		MazeNode current = path.peek();
-		int i = current.getRow();
-		int j = current.getColumn();
-
-		switch(dir) {
-		case LEFT:
-			path.push(nodes[i][j-1]);
-			break;
-		case RIGHT:
-			path.push(nodes[i][j+1]);
-			break;
-		case UP:
-			path.push(nodes[i-1][j]);
-			break;
-		case DOWN:
-			path.push(nodes[i+1][j]);
-			break;
-		default:
-			// code block
-		}
-
-		current = path.peek();
-		changeColor(current.getPane(), pathColor);
-	}
-
-
-	public void changeColor(Pane p, String color) {
-		p.setStyle("-fx-background-color:" + color + ";");
-	}
-
 
 	public void initMazeNodes() {
 		nodes[0][0] = new MazeNode(pane00 , 0, 0, NodeStatus.START);
@@ -532,7 +631,8 @@ public class MazeController implements Initializable{
 
 		nodes[1][0].addNeighbor(Directions.RIGHT, nodes[1][1]);
 		nodes[1][0].addNeighbor(Directions.UP, nodes[0][0]);
-
+		nodes[1][0].addNeighbor(Directions.DOWN, nodes[2][0]);
+		
 		nodes[1][1].addNeighbor(Directions.LEFT, nodes[1][0]);
 		nodes[1][1].addNeighbor(Directions.UP, nodes[0][1]);
 

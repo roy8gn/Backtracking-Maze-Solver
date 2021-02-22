@@ -1,9 +1,8 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 
-.root{
-	-fx-background-color: rgb(128,128,128);
+.root { 
+    -fx-background: rgb(47, 46, 53);
 }
-
 
 
 Pane{
@@ -11,11 +10,24 @@ Pane{
 	-fx-border-width: 0px;
 }
 
-Button {
+.button {
     -fx-background-color: linear-gradient(#ff5400, #be1d00);
     -fx-background-radius: 30;
     -fx-background-insets: 0;
     -fx-text-fill: white;
+}
+
+
+.button:pressed:hover {
+    -fx-scale-y: 0.9;
+    -fx-scale-x: 0.9;
+}
+
+.button:hover{
+    -fx-text-fill: white;
+    -fx-scale-y: 1.1;
+    -fx-scale-x: 1.1;
+    -fx-background-color: orange;
 }
 
 #pane00{
