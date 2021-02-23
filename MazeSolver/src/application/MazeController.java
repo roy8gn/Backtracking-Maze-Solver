@@ -5,15 +5,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.Stack;
-import java.util.concurrent.TimeUnit;
 
-import org.w3c.dom.NodeList;
+import java.util.Timer;
 
+import java.util.TimerTask;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -27,7 +26,6 @@ public class MazeController implements Initializable{
 	private String finalPathColor = "rgb(1, 144, 1)";
 	private Stack<MazeNode> path;
 	private MazeNode current; // Head of the Stack
-	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -37,27 +35,52 @@ public class MazeController implements Initializable{
 		path = new Stack<MazeNode>();
 		goTo(nodes[0][0]);
 	}
-
+	
 
 	@FXML
     void SolveMaze(ActionEvent event) {
-		// Available neighbors of a certain node
-		HashMap<Directions, MazeNode> availableNeighbors;
-		
-		// Azimuth from a certain node to the end of the maze
-		float azimuth;
-		
-		// prioritized Directions for a node by his azimuth to the end
-		ArrayList<Directions> prioritizeDirections; 
-		
-		solveBtn.setDisable(true);
-		
-		while(current.getStatus()!=NodeStatus.FINISH) {
-			availableNeighbors = availableNeighbors(current);
-			azimuth = calculateDirection(current.getRow(), current.getColumn()); 
-			prioritizeDirections = prioritizeDirections(azimuth);
-			prioritize(availableNeighbors, prioritizeDirections); // take a step in the maze	
-		}			
+		Thread taskThread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				// Available neighbors of a certain node
+				HashMap<Directions, MazeNode> availableNeighbors;
+
+				// Azimuth from a certain node to the end of the maze
+				float azimuth;
+
+				// prioritized Directions for a node by his azimuth to the end
+				ArrayList<Directions> prioritizeDirections; 
+
+				solveBtn.setDisable(true);
+
+				while(current.getStatus()!=NodeStatus.FINISH) {
+
+					availableNeighbors = availableNeighbors(current);
+					azimuth = calculateDirection(current.getRow(), current.getColumn()); 
+					prioritizeDirections = prioritizeDirections(azimuth);
+
+					prioritize(availableNeighbors, prioritizeDirections); // take a step in the maze
+					
+					try {
+						Thread.sleep(200);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				showPath();
+			}});
+		taskThread.start();	
+	}
+	
+	public void showPath() {
+		while(path.size()>1) {
+			changeColor(current.getPane(), finalPathColor);
+			path.pop();
+			updateCurrent();
+		}
+		changeColor(current.getPane(), finalPathColor);
+		path.pop();
 	}
 	
 	
@@ -112,15 +135,6 @@ public class MazeController implements Initializable{
 		path.push(m);
 		updateCurrent();
 		//delay();
-	}
-	
-	public void delay() {
-		try {
-			TimeUnit.SECONDS.sleep(1);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			System.out.println("ERROR while sleeping");
-		}
 	}
 	
 	public void goBack() { // Go back to the previous Node
