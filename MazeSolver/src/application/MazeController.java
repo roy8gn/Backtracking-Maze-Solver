@@ -144,7 +144,7 @@ public class MazeController implements Initializable{
 	}
 	
 	public float calculateDirection(int x, int y) { // calculate the azimuth from a node to the end of the maze
-	    float angle = (float) Math.toDegrees(Math.atan2(9 - y, 9 - x));
+	    float angle = (float) Math.toDegrees(Math.atan2(9 - x, 9 - y));
 	    
 	    if(angle < 0){
 	        angle += 360;
@@ -158,8 +158,8 @@ public class MazeController implements Initializable{
 		ArrayList<Directions> priorities = new ArrayList<Directions>();
 		
 		priorities.add(degreeToDirection(degree));
-		priorities.add(degreeToDirection(degree+90));
-		priorities.add(degreeToDirection(degree-90));
+		priorities.add(degreeToDirection(Math.min(degree+90, degree-90)));
+		priorities.add(degreeToDirection(Math.max(degree+90, degree-90)));
 		priorities.add(degreeToDirection(degree-180));
 		
 		return priorities;
